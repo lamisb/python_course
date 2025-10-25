@@ -4,16 +4,17 @@ from fileinput import filename
 
 def readFile(filename):
     try:
-        current_path = os.path.join(os.getcwd(), __file__)
-        with open(os.path.join(current_path,filename), 'r') as file:
+        with open(os.path.join(os.getcwd(),filename), 'r') as file:
             content = file.read()
+            if(content.strip() == ""):
+                raise ValueError("The file is empty.")
             print("File content:\n", content)
     except FileNotFoundError:
         print("Error: The file '{0}' was not found.".format(filename))
     except PermissionError:
-        print("Error: You do not have permission to read the file '{0}'.".format(filename))
+        print("Error: permission denied to read '{0}'.".format(filename))
     except ValueError:
-        print("Error: Invalid value encountered while reading the file '{0}'.".format(filename))
+        print("Error: There was an issue processing the file content '{0}'.".format(filename))
     except Exception as e:
         print("An unexpected error occurred: ", str(e))
 
@@ -21,7 +22,7 @@ def readFile(filename):
 
 def get_filename_from_user():
     # current file path
-    current_path = os.path.join(os.getcwd(), __file__)
+    current_path = os.getcwd()
     print("Hello you are currently on this path {0}, which file do you want to read?".format(current_path))
     return input("Please enter the file name: ")
 
