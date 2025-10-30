@@ -1,7 +1,6 @@
 import os
 from fileinput import filename
 
-
 def readFile(filename):
     try:
         with open(os.path.join(os.getcwd(),filename), 'r') as file:
@@ -17,8 +16,6 @@ def readFile(filename):
         print("Error: There was an issue processing the file content '{0}'.".format(filename))
     except Exception as e:
         print("An unexpected error occurred: ", str(e))
-
-
 
 def get_filename_from_user():
     # current file path
